@@ -7,8 +7,6 @@ const app = express();
 const port = process.env.PORT || 7000;
 
 const cors = require('cors');
-const res = require('express/lib/response');
-
 app.use(cors());
 app.use(express.json());
 
@@ -21,7 +19,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 client.connect();
-const collection = client.db('luxuriousCar').collection('cars');
+const collection = client.db('luxuriousCar').collection('allCars');
 
 app.get('/cars', async (req, res) => {
       const query = {};
