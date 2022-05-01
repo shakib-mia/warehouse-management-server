@@ -23,10 +23,17 @@ const collection = client.db('luxuriousCar').collection('allCars');
 
 app.get('/cars', async (req, res) => {
       const query = {};
-      const cursor = collection.find(query)
+      const cursor = collection.find(query);
       const cars = await cursor.toArray();
-
       res.send(cars)
+})
+
+app.get('/cars/:_id', async (req, res) => {
+      const query = {};
+      const cursor = collection.find(query);
+      const cars = await cursor.toArray();
+      const specialCar = cars.find(car => car._id == req.params._id);
+      res.send(specialCar)
 })
 
 app.listen(port, () => console.log("listening to port", port))
