@@ -20,6 +20,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 client.connect();
 const collection = client.db('luxuriousCar').collection('allCars');
+const allComments = client.db('luxuriousCar').collection('comments');
 
 app.get('/cars', async (req, res) => {
       const query = {};
@@ -34,6 +35,13 @@ app.get('/cars/:_id', async (req, res) => {
       const cars = await cursor.toArray();
       const specialCar = cars.find(car => car._id == req.params._id);
       res.send(specialCar)
+})
+
+app.get("/comments", async (req, res) => {
+      const query = {};
+      const cursor = allComments.find(query);
+      const comments = await cursor.toArray();
+      res.send(comments)
 })
 
 app.listen(port, () => console.log("listening to port", port))
