@@ -44,4 +44,10 @@ app.get("/comments", async (req, res) => {
       res.send(comments)
 })
 
+app.post("/comments", async (req, res) => {
+      const newComment = req.body;
+      const result = await allComments.insertOne(newComment)
+      res.send(result)
+})
+
 app.listen(port, () => console.log("listening to port", port))
