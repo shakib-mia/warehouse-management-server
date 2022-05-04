@@ -37,6 +37,12 @@ app.get('/cars/:_id', async (req, res) => {
       res.send(specialCar)
 })
 
+app.put("/cars/:_id", (req, res) => {
+      const newQuantity = req.body;
+      const result = collection.updateOne(newQuantity);
+      res.send(result)
+})
+
 app.get("/comments", async (req, res) => {
       const query = {};
       const cursor = allComments.find(query);
