@@ -22,11 +22,30 @@ client.connect();
 const collection = client.db('luxuriousCar').collection('allCars');
 const allComments = client.db('luxuriousCar').collection('comments');
 
-app.get('/cars', async (req, res) => {
+app.get('/allCars', async (req, res) => {
       const query = {};
       const cursor = collection.find(query);
       const cars = await cursor.toArray();
       res.send(cars)
+})
+
+app.post('/allCars', async (req, res) => {
+      const newCar = req.body;
+      const result = await collection.insertOne(newCar);
+      res.send(result)
+})
+
+app.get("/comments", async (req, res) => {
+      const query = {};
+      const cursor = allComments.find(query);
+      const comments = await cursor.toArray();
+      res.send(comments)
+})
+
+app.post("/comments", async (req, res) => {
+      const newComment = req.body;
+      const result = await allComments.insertOne(newComment)
+      res.send(result)
 })
 
 app.get('/cars/:_id', async (req, res) => {
@@ -41,19 +60,6 @@ app.post("/cars/:_id", (req, res) => {
       const newQuantity = req.body;
       const result = collection.updateOne(newQuantity);
       console.log(newQuantity)
-      res.send(result)
-})
-
-app.get("/comments", async (req, res) => {
-      const query = {};
-      const cursor = allComments.find(query);
-      const comments = await cursor.toArray();
-      res.send(comments)
-})
-
-app.post("/comments", async (req, res) => {
-      const newComment = req.body;
-      const result = await allComments.insertOne(newComment)
       res.send(result)
 })
 
