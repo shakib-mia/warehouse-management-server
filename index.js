@@ -48,7 +48,7 @@ app.post("/comments", async (req, res) => {
       res.send(result)
 })
 
-app.get('/cars/:_id', async (req, res) => {
+app.get('/allCars/:_id', async (req, res) => {
       const query = {};
       const cursor = collection.find(query);
       const cars = await cursor.toArray();
@@ -56,7 +56,7 @@ app.get('/cars/:_id', async (req, res) => {
       res.send(specialCar)
 })
 
-app.post("/cars/:_id", (req, res) => {
+app.post("/allCars/:_id", (req, res) => {
       const newQuantity = req.body;
       const result = collection.updateOne(newQuantity);
       console.log(newQuantity)
