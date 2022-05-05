@@ -29,7 +29,12 @@ app.get('/allCars', async (req, res) => {
       res.send(cars)
 })
 
-app.post('/allCars', async (req, res) => {
+// app.post('/allCars', async (req, res) => {
+//       const newCar = req.body;
+//       const result = await collection.insertOne(newCar);
+//       res.send(result)
+// })
+app.put('/allCars', async (req, res) => {
       const newCar = req.body;
       const result = await collection.insertOne(newCar);
       res.send(result)
@@ -58,7 +63,9 @@ app.get('/allCars/:_id', async (req, res) => {
 
 app.put("/allCars/:_id", async (req, res) => {
       const updatedItem = req.body;
-      const result = await collection.updateOne(updatedItem);
+      console.log(req.body)
+      const cursor = collection.find(query)
+      const result = await collection.replaceOne(updatedItem);
       res.send(result);
 })
 
