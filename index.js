@@ -58,7 +58,7 @@ app.get('/allCars/:_id', async (req, res) => {
 
 app.put("/allCars/:_id", async (req, res) => {
       const query = {};
-      const cursor = collection.find(query);
+      const cursor = collection.updateOne(query);
       const cars = await cursor.toArray();
       const specialCar = cars.find(car => car._id == req.params._id);
       res.send(specialCar)
