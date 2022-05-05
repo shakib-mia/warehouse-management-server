@@ -48,7 +48,7 @@ app.post("/comments", async (req, res) => {
       res.send(result)
 })
 
-app.get('/allCars/:_id', async (req, res) => {
+app.get('allCars/:_id', async (req, res) => {
       const query = {};
       const cursor = collection.find(query);
       const cars = await cursor.toArray();
