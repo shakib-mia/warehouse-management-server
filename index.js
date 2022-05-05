@@ -56,11 +56,11 @@ app.get('/allCars/:_id', async (req, res) => {
       res.send(specialCar)
 })
 
-/* app.patch("/allCars/:_id", async (req, res) => {
+app.put("/allCars/:_id", async (req, res) => {
       const newQuantity = req.body;
       const result = await collection.updateOne(newQuantity);
       console.log(newQuantity)
       res.send(result)
 })
- */
+
 app.listen(port, () => console.log("listening to port", port))
