@@ -56,9 +56,9 @@ app.get('allCars/:_id', async (req, res) => {
       res.send(specialCar)
 })
 
-app.post("/allCars/:_id", async (req, res) => {
+app.put("/allCars/:_id", async (req, res) => {
       const updatedItem = req.body;
-      const result = await collection.update(updatedItem);
+      const result = await collection.updateOne(updatedItem);
       res.send(result);
 })
 
