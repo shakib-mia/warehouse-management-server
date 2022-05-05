@@ -56,4 +56,10 @@ app.get('/allCars/:_id', async (req, res) => {
       res.send(specialCar)
 })
 
+app.post("/allCars/:_id", async (req, res) => {
+      const updatedItem = req.body;
+      const result = await collection.update(updatedItem);
+      res.send(result);
+})
+
 app.listen(port, () => console.log("listening to port", port))
