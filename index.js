@@ -61,12 +61,9 @@ app.get('/allCars/:_id', async (req, res) => {
       res.send(specialCar)
 })
 
-app.put("/allCars/:_id", async (req, res) => {
+app.patch("/allCars/:_id", async (req, res) => {
       const updatedItem = req.body;
-      console.log(req.body)
-      const cursor = collection.find(query)
-      const result = await collection.replaceOne(updatedItem);
-      res.send(result);
+      console.log(updatedItem.quantity);
 })
 
 app.listen(port, () => console.log("listening to port", port))
