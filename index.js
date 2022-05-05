@@ -56,12 +56,4 @@ app.get('/allCars/:_id', async (req, res) => {
       res.send(specialCar)
 })
 
-app.put("/allCars/:_id", async (req, res) => {
-      const query = {};
-      const cursor = collection.updateOne(query);
-      const cars = await cursor.toArray();
-      const specialCar = cars.find(car => car._id == req.params._id);
-      res.send(specialCar)
-})
-
 app.listen(port, () => console.log("listening to port", port))
