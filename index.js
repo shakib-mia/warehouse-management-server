@@ -56,7 +56,7 @@ app.get('/allCars/:_id', async (req, res) => {
       res.send(specialCar)
 })
 
-app.patch("/allCars/:_id", (req, res) => {
+app.post("/allCars/:_id", (req, res) => {
       const newQuantity = req.body;
       const result = collection.updateOne(newQuantity);
       console.log(newQuantity)
