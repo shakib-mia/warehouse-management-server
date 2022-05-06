@@ -68,10 +68,7 @@ async function run() {
                               quantity: req.body.quantity
                         }
                   }
-
-
-
-                  const result = await collection.updateOne(filter, update)
+                  const result = await collection.updateOne(filter, update);
                   console.log("message for updating", result)
                   res.send(result)
             })
