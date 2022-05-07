@@ -23,6 +23,7 @@ async function run() {
       try {
             const collection = client.db('luxuriousCar').collection('allCars');
             const allComments = client.db('luxuriousCar').collection('comments');
+            const userItems = client.db('luxuriousCar').collection('userItems');
 
             client.connect();
             app.get('/allCars', async (req, res) => {
@@ -70,6 +71,13 @@ async function run() {
                   const result = await collection.updateOne(filter, update);
                   console.log("message for updating", result)
                   res.send(result)
+            })
+
+            app.get('/userItems', async (req, res) => {
+                  const query = {};
+                  const cursor = userItems.find(query);
+                  const items = await cursor.toArray();
+                  res.send(items)
             })
 
             app.delete('/allCars/:_id', async (req, res) => {
