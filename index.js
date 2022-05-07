@@ -1,4 +1,5 @@
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const jwt = require('jsonwebtoken')
 
 const express = require('express');
 const app = express();
@@ -26,6 +27,15 @@ async function run() {
             const userItems = client.db('luxuriousCar').collection('userItems');
 
             client.connect();
+
+            app.post("/login", async (req, res) => {
+                  const user = req.body;
+                  const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+                        expiresIn: '1d'
+                  });
+                  res.send({ accessToken })
+            })
+
             app.get('/allCars', async (req, res) => {
                   const query = {};
                   const cursor = collection.find(query);
