@@ -80,6 +80,12 @@ async function run() {
                   res.send(items)
             })
 
+            app.post("/comments", async (req, res) => {
+                  const newItem = req.body;
+                  const result = await userItems.insertOne(newItem)
+                  res.send(result)
+            })
+
             app.delete('/allCars/:_id', async (req, res) => {
                   const id = req.params._id;
                   const filter = { _id: ObjectId(id) }
