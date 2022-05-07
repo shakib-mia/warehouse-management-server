@@ -8,6 +8,7 @@ require('dotenv').config();
 const port = process.env.PORT || 7000;
 
 const cors = require('cors');
+const { response } = require('express');
 app.use(cors());
 app.use(express.json());
 
@@ -59,8 +60,6 @@ async function run() {
             })
 
             app.put("/allCars/:_id", async (req, res) => {
-                  console.log(req)
-
                   const id = req.params._id;
                   const filter = { _id: ObjectId(id) };
                   const update = {
@@ -70,6 +69,13 @@ async function run() {
                   }
                   const result = await collection.updateOne(filter, update);
                   console.log("message for updating", result)
+                  res.send(result)
+            })
+
+            app.delete('/allCars/:_id', async (req, res) => {
+                  const id = req.params._id;
+                  const filter = { _id: ObjectId(id) }
+                  const result = await collection.deleteOne(filter);
                   res.send(result)
             })
       }
