@@ -80,7 +80,7 @@ async function run() {
                   res.send(items)
             })
 
-            app.post("/comments", async (req, res) => {
+            app.post("/userItems", async (req, res) => {
                   const newItem = req.body;
                   const result = await userItems.insertOne(newItem)
                   res.send(result)
