@@ -107,7 +107,12 @@ async function run() {
 
             app.delete('/allCars/:productId', async (req, res) => {
                   const id = req.params.productId;
-                  const result = await collection.deleteOne(id);
+                  const update = {
+                        $set: {
+                              body: ""
+                        }
+                  }
+                  const result = await collection.deleteOne(id, update);
                   res.send(result)
             })
       }
