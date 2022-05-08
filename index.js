@@ -95,7 +95,7 @@ async function run() {
                   console.log(result)
             })
 
-            app.put('/allCars/:productId', async (req, res) => {
+            app.delete('/allCars/:productId', async (req, res) => {
                   const id = req.params.productId;
                   const filter = { productId: ObjectId(id) }
                   const result = await collection.deleteOne(filter);
