@@ -6,7 +6,7 @@ const app = express();
 
 require('dotenv').config();
 
-const port = process.env.PORT || 7000;
+const port = process.env.PORT || 5000;
 
 const cors = require('cors');
 const { response } = require('express');
@@ -85,6 +85,14 @@ async function run() {
                   const newItem = req.body;
                   const result = await userItems.insertOne(newItem)
                   res.send(result)
+            })
+
+            app.get('/userItems/:productId', async (req, res) => {
+                  const query = {};
+                  const cursor = collection.find(query);
+                  const cars = await cursor.toArray();
+                  const specialCar = cars.find(car => car.productId == req.params.productId);
+                  res.send(specialCar)
             })
 
             app.delete('/userItems/:productId', async (req, res) => {
