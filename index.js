@@ -62,7 +62,7 @@ async function run() {
             })
 
             app.put("/allCars/:productId", async (req, res) => {
-                  const id = req.params._id;
+                  const id = req.params.productId;
                   const filter = { _id: ObjectId(id) };
                   const update = {
                         $set: {
