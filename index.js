@@ -89,16 +89,14 @@ async function run() {
 
             app.delete('/userItems/:productId', async (req, res) => {
                   const id = req.params.productId;
-                  const filter = { productId: ObjectId(id) }
-                  const result = await userItems.deleteOne(filter);
+                  const result = await userItems.deleteOne(id);
                   res.send(result)
                   console.log(result)
             })
 
             app.delete('/allCars/:productId', async (req, res) => {
                   const id = req.params.productId;
-                  const filter = { productId: ObjectId(id) }
-                  const result = await collection.deleteOne(filter);
+                  const result = await collection.deleteOne(id);
                   res.send(result)
             })
       }
