@@ -87,16 +87,17 @@ async function run() {
                   res.send(result)
             })
 
-            app.delete('/userItems/:_id', async (req, res) => {
-                  const id = req.params._id;
-                  const filter = { _id: ObjectId(id) }
+            app.delete('/userItems/:productId', async (req, res) => {
+                  const id = req.params.productId;
+                  const filter = { productId: ObjectId(id) }
                   const result = await userItems.deleteOne(filter);
                   res.send(result)
+                  console.log(result)
             })
 
-            app.delete('/allCars/:_id', async (req, res) => {
-                  const id = req.params._id;
-                  const filter = { _id: ObjectId(id) }
+            app.put('/allCars/:productId', async (req, res) => {
+                  const id = req.params.productId;
+                  const filter = { productId: ObjectId(id) }
                   const result = await collection.deleteOne(filter);
                   res.send(result)
             })
