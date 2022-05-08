@@ -78,6 +78,14 @@ async function run() {
                   const filter = { _id: ObjectId(id) }
                   const result = await collection.deleteOne(filter);
                   res.send(result);
+            });
+
+            app.post('/login', (req, res) => {
+                  const user = req.body;
+                  const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+                        expiresIn: '1d'
+                  });
+                  res.send({ accessToken })
             })
       }
       finally { }
