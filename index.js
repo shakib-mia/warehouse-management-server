@@ -24,7 +24,6 @@ async function run() {
       try {
             const collection = client.db('luxuriousCar').collection('allCars');
             const allComments = client.db('luxuriousCar').collection('comments');
-            const userItems = client.db('luxuriousCar').collection('userItems');
 
             client.connect();
             app.get('/allCars', async (req, res) => {
@@ -53,16 +52,16 @@ async function run() {
                   res.send(result)
             })
 
-            app.get('/allCars/:productId', async (req, res) => {
+            app.get('/allCars/:_id', async (req, res) => {
                   const query = {};
                   const cursor = collection.find(query);
                   const cars = await cursor.toArray();
-                  const specialCar = cars.find(car => car.productId == req.params.productId);
+                  const specialCar = cars.find(car => car._id == req.params._id);
                   res.send(specialCar)
             })
 
-            app.put("/allCars/:productId", async (req, res) => {
-                  const id = req.params.productId;
+            app.put("/allCars/:_id", async (req, res) => {
+                  const id = req.params._id;
                   const filter = { _id: ObjectId(id) };
                   const update = {
                         $set: {
@@ -74,37 +73,9 @@ async function run() {
                   res.send(result)
             })
 
-            app.get('/userItems', async (req, res) => {
-                  const query = {};
-                  const cursor = userItems.find(query);
-                  const items = await cursor.toArray();
-                  res.send(items)
-            })
-
-            app.post("/userItems", async (req, res) => {
-                  const newItem = req.body;
-                  const result = await userItems.insertOne(newItem)
-                  res.send(result)
-            })
-
-            app.get('/userItems/:productId', async (req, res) => {
-                  const query = {};
-                  const cursor = collection.find(query);
-                  const cars = await cursor.toArray();
-                  const specialCar = cars.find(car => car.productId == req.params.productId);
-                  res.send(specialCar)
-            })
-
-            app.delete('/userItems/:productId', async (req, res) => {
-                  const id = req.params.productId;
-                  const filter = { productId: ObjectId(id) }
-                  const result = await userItems.deleteOne(filter);
-                  res.send(result);
-            })
-
-            app.delete('/allCars/:productId', async (req, res) => {
-                  const id = req.params.productId;
-                  const filter = { productId: ObjectId(id) }
+            app.delete('/allCars/:_id', async (req, res) => {
+                  const id = req.params._id;
+                  const filter = { _id: ObjectId(id) }
                   const result = await collection.deleteOne(filter);
                   res.send(result);
             })
