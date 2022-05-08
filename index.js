@@ -57,7 +57,7 @@ async function run() {
                   const query = {};
                   const cursor = collection.find(query);
                   const cars = await cursor.toArray();
-                  const specialCar = cars.find(car => car._id == req.params._id);
+                  const specialCar = cars.find(car => car.productId == req.params.productId);
                   res.send(specialCar)
             })
 
