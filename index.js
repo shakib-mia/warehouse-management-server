@@ -63,13 +63,12 @@ async function run() {
 
             app.put("/allCars/:productId", async (req, res) => {
                   const id = req.params._id;
-                  const filter = { _id: ObjectId(id) };
                   const update = {
                         $set: {
                               quantity: req.body.quantity
                         }
                   }
-                  const result = await collection.updateOne(filter, update);
+                  const result = await collection.updateOne(id, update);
                   console.log("message for updating", result)
                   res.send(result)
             })
