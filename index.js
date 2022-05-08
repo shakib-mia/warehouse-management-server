@@ -53,7 +53,7 @@ async function run() {
                   res.send(result)
             })
 
-            app.get('/allCars/:_id', async (req, res) => {
+            app.get('/allCars/:productId', async (req, res) => {
                   const query = {};
                   const cursor = collection.find(query);
                   const cars = await cursor.toArray();
@@ -61,7 +61,7 @@ async function run() {
                   res.send(specialCar)
             })
 
-            app.put("/allCars/:_id", async (req, res) => {
+            app.put("/allCars/:productId", async (req, res) => {
                   const id = req.params._id;
                   const filter = { _id: ObjectId(id) };
                   const update = {
