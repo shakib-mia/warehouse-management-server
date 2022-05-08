@@ -79,6 +79,13 @@ async function run() {
                   const items = await cursor.toArray();
                   res.send(items)
             })
+            app.get('/userItems/:productId', async (req, res) => {
+                  const query = {};
+                  const cursor = userItems.find(query);
+                  const cars = await cursor.toArray();
+                  const userCar = cars.find(car => car.productId == req.params.productId);
+                  res.send(userCar)
+            })
 
             app.post("/userItems", async (req, res) => {
                   const newItem = req.body;
