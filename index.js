@@ -53,22 +53,23 @@ async function run() {
                   res.send(result)
             })
 
-            app.get('/allCars/:productId', async (req, res) => {
+            app.get('/allCars/:_id', async (req, res) => {
                   const query = {};
                   const cursor = collection.find(query);
                   const cars = await cursor.toArray();
-                  const specialCar = cars.find(car => car.productId == req.params.productId);
+                  const specialCar = cars.find(car => car._id == req.params._id);
                   res.send(specialCar)
             })
 
-            app.put("/allCars/:productId", async (req, res) => {
+            app.put("/allCars/:_id", async (req, res) => {
                   const id = req.params._id;
+                  const filter = { _id: ObjectId(id) };
                   const update = {
                         $set: {
                               quantity: req.body.quantity
                         }
                   }
-                  const result = await collection.updateOne(id, update);
+                  const result = await collection.updateOne(filter, update);
                   console.log("message for updating", result)
                   res.send(result)
             })
@@ -79,13 +80,6 @@ async function run() {
                   const items = await cursor.toArray();
                   res.send(items)
             })
-            app.get('/userItems/:productId', async (req, res) => {
-                  const query = {};
-                  const cursor = userItems.find(query);
-                  const cars = await cursor.toArray();
-                  const userCar = cars.find(car => car.productId == req.params.productId);
-                  res.send(userCar)
-            })
 
             app.post("/userItems", async (req, res) => {
                   const newItem = req.body;
@@ -95,24 +89,16 @@ async function run() {
 
             app.delete('/userItems/:productId', async (req, res) => {
                   const id = req.params.productId;
-                  const update = {
-                        $set: {
-                              body: ""
-                        }
-                  }
-                  const result = await userItems.deleteOne(id, update);
+                  const filter = { productId: ObjectId(id) }
+                  const result = await userItems.deleteOne(filter);
                   res.send(result)
                   console.log(result)
             })
 
-            app.delete('/allCars/:productId', async (req, res) => {
+            app.put('/allCars/:productId', async (req, res) => {
                   const id = req.params.productId;
-                  const update = {
-                        $set: {
-                              body: ""
-                        }
-                  }
-                  const result = await collection.deleteOne(id, update);
+                  const filter = { productId: ObjectId(id) }
+                  const result = await collection.deleteOne(filter);
                   res.send(result)
             })
       }
